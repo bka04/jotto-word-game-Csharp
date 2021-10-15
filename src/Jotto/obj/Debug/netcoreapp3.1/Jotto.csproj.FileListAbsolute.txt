@@ -1,0 +1,12 @@
+/Users/brentaronsen/jotto/src/Jotto/bin/Debug/netcoreapp3.1/Jotto.deps.json
+/Users/brentaronsen/jotto/src/Jotto/bin/Debug/netcoreapp3.1/Jotto.runtimeconfig.json
+/Users/brentaronsen/jotto/src/Jotto/bin/Debug/netcoreapp3.1/Jotto.runtimeconfig.dev.json
+/Users/brentaronsen/jotto/src/Jotto/bin/Debug/netcoreapp3.1/Jotto.dll
+/Users/brentaronsen/jotto/src/Jotto/bin/Debug/netcoreapp3.1/Jotto.pdb
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.csprojAssemblyReference.cache
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.AssemblyInfoInputs.cache
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.AssemblyInfo.cs
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.csproj.CoreCompileInputs.cache
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.dll
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.pdb
+/Users/brentaronsen/jotto/src/Jotto/obj/Debug/netcoreapp3.1/Jotto.genruntimeconfig.cache
