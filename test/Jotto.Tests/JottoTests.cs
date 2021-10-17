@@ -82,5 +82,32 @@ namespace Jotto.Tests
             //Assert
             Assert.Equal(guess, wordToGuess);
         }
+
+        [Fact]
+        public void InvalidGuessThrowsException()
+        {
+            //Arrange
+            var wordList = new WordList("Five Letter Words Test Full");
+            var playerGuesses = new HumanGuessList();
+
+            //Act
+
+            //Assert
+            Assert.Throws<ArgumentException>(() => playerGuesses.AddGuess("abcdA"));
+        }
+
+        [Fact]
+        public void ValidGuessIsAdded()
+        {
+            //Arrange
+            var wordList = new WordList("Five Letter Words Test Full");
+            var playerGuesses = new HumanGuessList();
+
+            //Act
+            playerGuesses.AddGuess("howdy");
+
+            //Assert
+            Assert.Equal("howdy", playerGuesses.GetGuessByIndex(0));
+        }
     }
 }
