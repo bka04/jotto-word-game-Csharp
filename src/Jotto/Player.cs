@@ -20,7 +20,7 @@ namespace Jotto
 
         public HumanPlayer()
         {
-            guessList = new HumanGuessList();
+            guessList = new GuessList();
             SetNewWord();
         }
 
@@ -44,23 +44,25 @@ namespace Jotto
                 try
                 {
                     Console.WriteLine("Enter a five letter word with no repeating letters!");
-                    var guess = Console.ReadLine().ToLower();
-                    if (!wordList.CheckWord(guess)) //is word valid? Check against initial word list.
+                    var wordGuessed = Console.ReadLine().ToLower();
+                    //TO DO: PULL thIS CHECK OUT INTO A SEPARATE METHOD
+                    if (!wordList.CheckWord(wordGuessed)) //is word valid? Check against initial word list.
                     {
-                        throw new ArgumentException($"{guess} is not a valid word.");
+                        throw new ArgumentException($"{wordGuessed} is not a valid word.");
                     }
-                    guessList.AddGuess(guess); //validates guess and adds to list of guesses
 
-                    madeValidGuess = true;
-                    if (guess == wordToGuess) //win!
+                    madeValidGuess = guessList.HaveNotGuessedYet(wordGuessed); //throws exception if already guessed
+                    if (wordGuessed == wordToGuess) //win!
                     {
                         Console.WriteLine("You are correct!");
                         correctGuess = true;
                     }
-                    else
+                    else //incorrect guess. Add to guessList and let user know how many letters matched
                     {
-                        var numberOfMatches = WordList.GetNumberOfMatchedLetters(guess, wordToGuess);
-                        Console.WriteLine($"{guess} has {numberOfMatches} matching letters.");
+                        var numberOfMatches = WordList.GetNumberOfMatchedLetters(wordGuessed, wordToGuess);
+                        Guess guess = new Guess() {Word = wordGuessed, LettersMatched = numberOfMatches};
+                        guessList.AddGuess(guess);
+                        Console.WriteLine($"{wordGuessed} has {numberOfMatches} matching letters.");
                     }
                 }
                 catch (ArgumentException ex)
@@ -77,26 +79,31 @@ namespace Jotto
     {
         public ComputerPlayer()
         {
-            guessList = new ComputerGuessList();
+            guessList = new GuessList();
         }
 
         //computer makes a guess; user has to tell comp how many letters match. Return true if guess is correct.
         public override bool MakeGuess() 
         {
-            var guess = wordList.RandomWord; //get a random word that the computer hasn't eliminated yet
-            guessList.AddGuess(guess); //add to list of guesses
-            Console.WriteLine($"I guess '{guess}'. How many letters match (0-5)? Enter JOTTO if correct.");
-            return getMatchedLettersFromUser(guess); //return bool for if game is over or not
+            var wordGuessed = wordList.RandomWord; //get a random word that the computer hasn't eliminated yet
+            Console.WriteLine($"I guess '{wordGuessed}'. How many letters match (0-5)? Enter JOTTO if correct.");
+
+            //get number of letters matched and bool for if game is over or not
+            var item = getMatchedLettersFromUser(wordGuessed); 
+            int matchedLetters = item.Item1;
+            bool correctGuess = item.Item2;
+            guessList.AddGuess(new Guess() {Word = wordGuessed, LettersMatched = matchedLetters}); //add to list of guesses
+            return correctGuess;
         }
 
-        private bool getMatchedLettersFromUser(string guess)
+        private (int, bool) getMatchedLettersFromUser(string guess)
         {
             var correctGuess = false;
             var input = "";
             var matchedLetters = -1;
             var doneGettingInput = false;
             while (!doneGettingInput) {
-                input = Console.ReadLine();
+                input = Console.ReadLine(); //get number of matched letters from user (or JOTTO if correct)
                 if (input.ToUpper() == "JOTTO")
                 {
                     correctGuess = true;
@@ -123,7 +130,7 @@ namespace Jotto
                     }
                 }
             }
-            return correctGuess;
+            return (matchedLetters, correctGuess);
         }
 
     }

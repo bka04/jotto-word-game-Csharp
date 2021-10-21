@@ -42,7 +42,6 @@ namespace Jotto
             words = words.FindAll(word => GetNumberOfMatchedLetters(guess, word) == lettersMatched);
         }
 
-
         static public int GetNumberOfMatchedLetters(string guess, string wordListWord)
         {
             var matches = 0;
