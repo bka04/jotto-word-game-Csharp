@@ -1,3 +1,7 @@
+*.cache
+*.dll
+*.pdb
+
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
