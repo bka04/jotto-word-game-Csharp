@@ -1,6 +1,8 @@
 *.cache
 *.dll
 *.pdb
+bin
+obj
 
 .vscode/*
 !.vscode/settings.json
