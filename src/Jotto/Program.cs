@@ -6,6 +6,7 @@ namespace Jotto
     {
         static void Main(string[] args)
         {
+            Console.Clear();
             HumanPlayer user = new HumanPlayer();
             ComputerPlayer comp = new ComputerPlayer();
 
@@ -32,7 +33,7 @@ namespace Jotto
                 }
             } else 
             {
-                Console.WriteLine($"You lose. Your word was '{user.GetWordToGuess()}'.");
+                Console.WriteLine($"You lose. Your word was '{user.wordToGuess}'.");
             }
             
         }

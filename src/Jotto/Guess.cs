@@ -1,10 +1,28 @@
+using System;
+
 namespace Jotto
 {
     public class Guess
     {
         public int LettersMatched {get; set;}
         public string Word {get; set;}
+
+        //takes an int along with the lower and upper bounds of allowable integers
+        public static bool ValidateDigitInput(int digit, int lowerBound, int upperBound)
+        {
+            if (digit >= (lowerBound) && digit <= upperBound)
+            {
+                return true;
+            }
+            else 
+            {
+                throw new FormatException();
+            }
+        }
     }
+
+
+
 
     // private static bool hasNonLetters(string word)
     // {

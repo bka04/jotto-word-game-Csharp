@@ -10,7 +10,7 @@ namespace Jotto
         public WordList(string name) //constructor - intialize word list from text file
         {
             Name = name;
-            words = File.ReadLines($"{Name}.txt").ToList();
+            words = File.ReadLines($"/Users/brentaronsen/jotto/{Name}.txt").ToList();
         }
 
         private List<string> words;
@@ -39,7 +39,7 @@ namespace Jotto
 
         public void NarrowWordList(string guess, int lettersMatched) //narrow word list based on guess and how many letters match
         {
-            words = words.FindAll(word => GetNumberOfMatchedLetters(guess, word) == lettersMatched);
+            words = words.FindAll(word => (GetNumberOfMatchedLetters(guess, word) == lettersMatched) && (word != guess) );
         }
 
         static public int GetNumberOfMatchedLetters(string guess, string wordListWord)
