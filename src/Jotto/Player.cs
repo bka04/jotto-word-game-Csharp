@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Jotto
 {
@@ -14,6 +14,7 @@ namespace Jotto
         public GuessList guessList;
         public abstract bool MakeGuess();
     }
+
 
     public class HumanPlayer : Player
     {
@@ -76,6 +77,7 @@ namespace Jotto
         }
     }
 
+
     public class ComputerPlayer : Player
     {
         public ComputerPlayer()
@@ -86,7 +88,12 @@ namespace Jotto
         //computer makes a guess; user has to tell comp how many letters match. Return true if guess is correct.
         public override bool MakeGuess() 
         {
-            //START HERE AND USE ASKUSERTOFIXMATCHEDLETTERS IF WORDLIST IS EMPTY
+            if (wordList.wordCount() == 0)
+            {
+                askUserToFixMatchedLetters();
+                wordList = guessList.RecalcGuesses(); //recalculate possible words from new word list
+                //need to check here if word count is still 0. if so, ask for answer?
+            }
 
             var wordGuessed = wordList.RandomWord; //get a random word that the computer hasn't eliminated yet
             Console.WriteLine($"I guess '{wordGuessed}'. How many letters match (0-5)? Enter JOTTO if correct.");
@@ -131,12 +138,11 @@ namespace Jotto
                         Console.WriteLine(ex.Message);
                         continue;
                     }
+                    Console.WriteLine($"How many letters match (0-5) for {wordToUpdate}? Enter JOTTO if correct.");
                     var item = getMatchedLettersFromUser(wordToUpdate);
                     guessList.UpdateLettersMatched(wordToUpdate, item.Item1);
                 }
             }
-            //recalc word list
-            //if still none, clear out guess list and start over.
         }
 
         private (int, bool) getMatchedLettersFromUser(string guess)

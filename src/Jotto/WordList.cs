@@ -27,6 +27,11 @@ namespace Jotto
             }
         }
 
+        public int wordCount()
+        {
+            return words.Count;
+        }
+
         public string GetWordByIndex(int index) //primarily for unit test
         {
             return words[index];

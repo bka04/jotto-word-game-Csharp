@@ -21,6 +21,18 @@ namespace Jotto
             }
         }
 
+        public WordList RecalcGuesses()
+        {
+            WordList wordList = new WordList("Five Letter Words");
+            foreach (var guess in guessList)
+            {
+                Console.WriteLine($"RECALC! {guess.Word} {guess.LettersMatched}");
+                wordList.NarrowWordList(guess.Word, guess.LettersMatched);
+                Console.WriteLine(wordList.wordCount());
+            }
+            return wordList;
+        }
+
         public void AddGuess(Guess guess)
         {
             guess.Word = guess.Word.ToLower();
